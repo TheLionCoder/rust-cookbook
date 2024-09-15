@@ -1,0 +1,12 @@
+[package]
+name = "rust-cookbook"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = '0.8.5'
+rand_distr = '0.4.3'
+clap = "4.5.17"
+ansi_term = "0.12.1"
+flate2 = "1.0.33"
+tar = "0.4.41"
