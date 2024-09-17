@@ -5,7 +5,7 @@ use flate2::{read::GzDecoder, write::GzEncoder, Compression};
 use tar::Archive;
 
 pub fn decompress_tarball() -> Result<(), Error> {
-    let path: String = String::from("archive.tar.gz");
+    let path: String = String::from("./assets/archive.tar.gz");
 
     let tar_gz = File::open(path)?;
     let tar= GzDecoder::new(tar_gz);
@@ -17,7 +17,7 @@ pub fn decompress_tarball() -> Result<(), Error> {
 }
 
 pub fn compress_tarball() -> Result<(), Error> {
-    let tar_gz = File::create("archive.tar.gz")?;
+    let tar_gz = File::create("./assets/archive.tar.gz")?;
     let enc = GzEncoder::new(tar_gz, Compression::default());
     let mut tar = tar::Builder::new(enc);
     tar.append_dir_all("backup/logs", "/var/log")?;
@@ -25,7 +25,7 @@ pub fn compress_tarball() -> Result<(), Error> {
 }
 
 pub fn decompress_tarball_remove_prefix() -> Result<(), Error> {
-    let file = File::open("././assets/archive.tar.gz")?;
+    let file = File::open("./assets/archive.tar.gz")?;
     let mut archive = Archive::new(GzDecoder::new(file));
     let prefix = "bundle/logs";
     
