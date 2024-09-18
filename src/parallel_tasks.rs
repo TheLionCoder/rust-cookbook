@@ -1,6 +1,12 @@
+use ::std::fs::create_dir_all;
+use core::default::Default;
+use glob::{glob_with, MatchOptions};
+use image::{imageops::FilterType, DynamicImage};
 use rand::distributions::Alphanumeric;
 use rand::{thread_rng, Rng};
 use rayon::prelude::*;
+use std::error::Error;
+use std::path::{Path, PathBuf};
 
 struct Person {
     age: u8,
@@ -75,4 +81,48 @@ pub fn map_reduce_in_parallel() {
 
     assert!((avg_over_30 - alt_avg_over_30).abs() < f32::EPSILON);
     eprintln!("The average age of people older than 30 is {}", avg_over_30);
+}
+
+pub fn generate_jpg_thumbnails() -> Result<(), Box<dyn Error>> {
+    let options: MatchOptions = Default::default();
+    let files: Vec<_> = glob_with("./assets/images/*.jpg", options)?
+        .filter_map(|x| x.ok())
+        .collect();
+
+    if files.len() == 0 {
+        return Err("No .jgp files found".into());
+    }
+
+    let thumb_dir: &str = "./assets/thumbnails";
+    create_dir_all(thumb_dir)?;
+
+    println!("Saving {} thumbails into '{}'...", files.len(), thumb_dir);
+
+    let image_failures: Vec<_> = files
+        .par_iter()
+        .map(|path| make_thumbnail(path, thumb_dir, 300).map_err(|_e| path.display().to_string()))
+        .filter_map(Result::err)
+        .collect();
+
+    image_failures
+        .iter()
+        .for_each(|x| println!("Failed to process image {}", x));
+    Ok(())
+}
+
+fn make_thumbnail<PA, PB>(
+    original: PA,
+    thumb_dir: PB,
+    longest_edge: u32,
+) -> Result<(), Box<dyn Error>>
+where
+    PA: AsRef<Path>,
+    PB: AsRef<Path>,
+{
+    let img: DynamicImage = image::open(original.as_ref())?;
+    let file_path: PathBuf = thumb_dir.as_ref().join(original);
+
+    Ok(img
+        .resize(longest_edge, longest_edge, FilterType::Nearest)
+        .save(file_path)?)
 }
