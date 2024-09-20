@@ -1,5 +1,6 @@
-mod cryptography;
+mod character_set;
 
 fn main() {
-    cryptography::calculate_the_sha256_digest_of_a_file().unwrap();
+    character_set::encode_string().unwrap();
+    character_set::encode_url();
 }
