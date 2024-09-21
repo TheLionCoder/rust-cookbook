@@ -1,6 +1,6 @@
-mod character_set;
+mod error_handling;
 
 fn main() {
-    character_set::encode_string().unwrap();
-    character_set::encode_url();
+    error_handling::handle_errors();
+    error_handling::check_and_handle_errors();
 }
