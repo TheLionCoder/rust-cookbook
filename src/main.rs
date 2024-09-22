@@ -1,6 +1,5 @@
-mod error_handling;
+mod external_command;
 
 fn main() {
-    error_handling::handle_errors();
-    error_handling::check_and_handle_errors();
+    external_command::run_external_command().unwrap();
 }
