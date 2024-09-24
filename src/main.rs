@@ -1,5 +1,7 @@
-mod external_command;
+mod trigonometry;
 
 fn main() {
-    external_command::run_external_command().unwrap();
+    trigonometry::calculate_length_side_of_triangle();
+    trigonometry::verify_tan();
+    trigonometry::calculate_distance_between_two_points_on_earth();
 }
