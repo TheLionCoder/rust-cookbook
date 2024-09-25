@@ -1,7 +1,8 @@
-mod trigonometry;
+mod statistics;
 
 fn main() {
-    trigonometry::calculate_length_side_of_triangle();
-    trigonometry::verify_tan();
-    trigonometry::calculate_distance_between_two_points_on_earth();
+    let data: [i32; 10] = [3, 1, 6, 1, 5, 8, 1, 8, 10, 11];
+    statistics::calculate_median_of_the_data(&data);
+    statistics::calculate_mode_of_the_data(&data);
+    statistics::calculate_zscore(&data);
 }

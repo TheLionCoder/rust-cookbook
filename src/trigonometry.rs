@@ -2,7 +2,7 @@ pub fn calculate_length_side_of_triangle() {
     let angle: f64 = 2.;
     let length_side = 80.0f64;
 
-    let hypotenuse: f64 = length_side /angle.sin();
+    let hypotenuse: f64 = length_side / angle.sin();
 
     println!("Hypotenuse: {}", hypotenuse);
 }
