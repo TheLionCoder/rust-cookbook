@@ -42,3 +42,6 @@ ndarray = { version = "0.16.1", features = ["approx"] }
 approx = "0.5.1"
 nalgebra = { version = "0.33.0", features = ["serde-serialize", "serde"] }
 num = "0.4.3"
+unicode-segmentation = "1.12.0"
+select = "0.6.0"
+tokio = { version = "1.40.0", features = ["rt", "rt-multi-thread", "macros"] }
