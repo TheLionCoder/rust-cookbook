@@ -34,7 +34,7 @@ serde = { version = "1.0.210", features = ["derive"] }
 serde_json = "1.0.128"
 toml = "0.8.19"
 error-chain = "0.12.4"
-reqwest = { version = "0.12.7", features = ["blocking"] }
+reqwest = { version = "0.12.7", features = ["blocking", "json"] }
 same-file = "1.0.6"
 memmap = "0.7.0"
 regex = "1.10.6"
@@ -45,3 +45,6 @@ num = "0.4.3"
 unicode-segmentation = "1.12.0"
 select = "0.6.0"
 tokio = { version = "1.40.0", features = ["rt", "rt-multi-thread", "macros"] }
+mime = "0.3.17"
+tempdir = "0.3.7"
+tempfile = "3.13.0"
